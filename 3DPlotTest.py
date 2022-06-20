@@ -25,9 +25,9 @@ V = 45
 degrees = 45
 alpha = degrees * 0.017453
 p = 1.23  # air density
-A = 0.00426 # Surface area of a baseball
+A = 0.00426  # Surface area of a baseball
 C = .4  # drag coefficient
-m = 0.145 # mass of a baseball in kg
+m = 0.145  # mass of a baseball in kg
 
 
 t = np.arange(0, 8, .2)  # This would be the z-axis ('t' means time here)
@@ -37,6 +37,8 @@ t = np.arange(0, 8, .2)  # This would be the z-axis ('t' means time here)
 # y = Y0 + (V0Y*t) + (.5*g*(t*t))
 Vx = V * np.cos(alpha)
 Vy = V * np.sin(alpha)
+
+Vt = m*g*C
 
 dragA = -((p*A*C*(Vx*Vx))/(2*m))
 # x = (Vx * t) + (.5*dragA*(t*t))
@@ -49,7 +51,8 @@ numDataPoints = len(t)
 
 # GET SOME MATPLOTLIB OBJECTS
 fig = plt.figure()
-ax = Axes3D(fig)
+ax = Axes3D(fig, auto_add_to_figure=False)
+fig.add_axes(ax)
 redDots = plt.plot(dataSet[0], dataSet[1], dataSet[2], lw=2, c='r', marker='o')[0]  # For scatter plot
 # NOTE: Can't pass empty arrays into 3d version of plot()
 line = plt.plot(dataSet[0], dataSet[1], dataSet[2], lw=2, c='g')[0]  # For line plot
